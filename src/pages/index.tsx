@@ -1,30 +1,18 @@
 import { NextPage } from "next";
 import useSWR from "swr";
-import axios from "axios";
-
-interface Tag {
-  id: number;
-  name: string;
-}
-
-interface Site {
-  id: number;
-  name: string;
-}
-
-interface Article {
-  id: number;
-  title: string;
-  url: string;
-  image?: string;
-  crawledAt: string;
-  tags: Tag[];
-  sites: Site[];
-}
+import { ArticleApi, Configuration, Article } from "../data/api";
 
 const fetchArticles = async (): Promise<Article[]> => {
-  const resp = await axios.get("/api/v1/articles");
-  return resp.data.articles as Article[];
+  const conf: Configuration = {
+    baseOptions: {
+      headers: {
+        Accept: "application/json",
+      },
+    },
+  };
+  const api = new ArticleApi(conf, "/api/v1");
+  const resp = await api.getArticle();
+  return resp.data.articles;
 };
 
 const Home: NextPage = () => {

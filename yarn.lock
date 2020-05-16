@@ -963,6 +963,11 @@
   resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-9.4.0.tgz#6f8732e1909fb12f6dca8a82b7fc4b79c6c8cfcd"
   integrity sha512-AaEC/diS2two2JLsEItGhuAux8UfPo0o34/7l1SIw0t4SYunUYJsxM/Y55OR2ljiVn9ffKR1n1U9IEQhsK80jw==
 
+"@openapitools/openapi-generator-cli@^1.0.13-4.3.1":
+  version "1.0.13-4.3.1"
+  resolved "https://registry.yarnpkg.com/@openapitools/openapi-generator-cli/-/openapi-generator-cli-1.0.13-4.3.1.tgz#3360698a6b34a33dd46eaf7cdf1a6a9027b1183f"
+  integrity sha512-hUbSHCXak8vujMpTgH5dDACq0mynya37xgPFD3JbmnwRrPrgrZ4mr3+w7QZJ5aLMCIfb2j3s96d1sWaOZYZzxA==
+
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@samverschueren/stream-to-observable/-/stream-to-observable-0.3.0.tgz#ecdf48d532c58ea477acfcab80348424f8d0662f"

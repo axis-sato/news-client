@@ -1,0 +1,200 @@
+openapi: 3.0.0
+info:
+  title: news-api
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3001/api/v1'
+    description: local
+  - url: 'http://localhost:3100'
+    description: mock
+paths:
+  /articles:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - article
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  articles:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Article'
+              examples:
+                qiita:
+                  value:
+                    articles:
+                      - id: 1
+                        title: goの記事1
+                        url: 'https://qiita.com/go/1'
+                        crawled_at: '2020-05-02T00:00:00.000Z'
+                        tags:
+                          - id: 1
+                            name: go
+                        site:
+                          id: 1
+                          name: Qiita
+                      - id: 2
+                        title: goの記事2
+                        url: 'https://qiita.com/go/2'
+                        crawled_at: '2020-05-02T00:00:00.000Z'
+                        tags:
+                          - id: 1
+                            name: go
+                        site:
+                          id: 1
+                          name: Qiita
+                qiita2:
+                  value:
+                    articles:
+                      - id: 1
+                        title: goの記事1
+                        url: 'https://qiita.com/go/1'
+                        image: 'https://qiita.com/go/1.png'
+                        crawled_at: '2020-05-02T00:00:00.000Z'
+                        tags:
+                          - id: 1
+                            name: go
+                        site:
+                          id: 1
+                          name: Qiita
+                      - id: 2
+                        title: goの記事2
+                        url: 'https://qiita.com/go/2'
+                        image: 'https://qiita.com/go/2.png'
+                        crawled_at: '2020-05-02T00:00:00.000Z'
+                        tags:
+                          - id: 1
+                            name: go
+                        site:
+                          id: 1
+                          name: Qiita
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Error'
+              examples:
+                InternalServerError:
+                  value:
+                    error:
+                      - code: Internal Server Error
+                        message: サーバで予期せぬエラーが発生しました。
+      operationId: getArticle
+      description: 記事一覧を取得
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+          in: query
+          name: limit
+          description: 取得件数
+        - schema:
+            type: string
+            example: go
+          in: query
+          name: tag
+          description: 取得対象のタグ名
+components:
+  schemas:
+    Tag:
+      title: Tag
+      type: object
+      x-examples:
+        go:
+          id: 1
+          name: go
+        flutter:
+          id: 2
+          name: flutter
+      description: 記事に紐づくタグ
+      properties:
+        id:
+          type: integer
+          example: 1
+          minimum: 1
+        name:
+          type: string
+          example: go
+      required:
+        - id
+        - name
+    Site:
+      title: Site
+      type: object
+      x-examples:
+        Qiita:
+          id: 1
+          name: Qiita
+        Dev.to:
+          id: 2
+          name: Dev.to
+      description: 記事の掲載サイト
+      properties:
+        id:
+          type: integer
+          example: 1
+          minimum: 1
+        name:
+          type: string
+          example: Qiita
+      required:
+        - id
+        - name
+    Article:
+      title: Article
+      type: object
+      description: 記事
+      properties:
+        id:
+          type: integer
+          example: 1
+          minimum: 1
+        title:
+          type: string
+        url:
+          type: string
+          format: uri
+        crawled_at:
+          type: string
+          format: date-time
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        site:
+          $ref: '#/components/schemas/Site'
+        image:
+          type: string
+          format: uri
+      required:
+        - id
+        - title
+        - url
+        - crawled_at
+        - tags
+        - site
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  securitySchemes: {}
