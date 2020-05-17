@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import useSWR from "swr";
-import { ArticleApi, Configuration, Article } from "../data/api";
+import { ArticleApi, Configuration, Article } from "~/data/api";
 
 const fetchArticles = async (): Promise<Article[]> => {
   const conf: Configuration = {
