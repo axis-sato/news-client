@@ -91,7 +91,7 @@ paths:
                     error:
                       - code: Internal Server Error
                         message: サーバで予期せぬエラーが発生しました。
-      operationId: getArticle
+      operationId: getArticles
       description: 記事一覧を取得
       parameters:
         - schema:
@@ -167,7 +167,7 @@ components:
         url:
           type: string
           format: uri
-        crawled_at:
+        crawledAt:
           type: string
           format: date-time
         tags:
@@ -183,7 +183,7 @@ components:
         - id
         - title
         - url
-        - crawled_at
+        - crawledAt
         - tags
         - site
     Error:

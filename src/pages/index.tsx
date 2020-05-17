@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import useSWR from "swr";
 import { ArticleApi, Configuration, Article } from "~/data/api";
+import ArticleCard from "~/components/Article";
 
 const fetchArticles = async (): Promise<Article[]> => {
   const conf: Configuration = {
@@ -11,7 +12,7 @@ const fetchArticles = async (): Promise<Article[]> => {
     },
   };
   const api = new ArticleApi(conf, "/api/v1");
-  const resp = await api.getArticle();
+  const resp = await api.getArticles();
   return resp.data.articles;
 };
 
@@ -25,17 +26,11 @@ const Home: NextPage = () => {
   }
 
   return (
-    <ul>
+    <div>
       {data.map((a) => {
-        return (
-          <li key={a.id}>
-            <a target="_blank" href={a.url}>
-              {a.title}
-            </a>
-          </li>
-        );
+        return <ArticleCard key={a.id} article={a} />;
       })}
-    </ul>
+    </div>
   );
 };
 

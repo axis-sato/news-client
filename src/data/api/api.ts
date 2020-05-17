@@ -48,7 +48,7 @@ export interface Article {
      * @type {string}
      * @memberof Article
      */
-    crawled_at: string;
+    crawledAt: string;
     /**
      * 
      * @type {Array<Tag>}
@@ -166,7 +166,7 @@ export const ArticleApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getArticle: async (limit?: number, tag?: string, options: any = {}): Promise<RequestArgs> => {
+        getArticles: async (limit?: number, tag?: string, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/articles`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
             let baseOptions;
@@ -215,8 +215,8 @@ export const ArticleApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getArticle(limit?: number, tag?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
-            const localVarAxiosArgs = await ArticleApiAxiosParamCreator(configuration).getArticle(limit, tag, options);
+        async getArticles(limit?: number, tag?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+            const localVarAxiosArgs = await ArticleApiAxiosParamCreator(configuration).getArticles(limit, tag, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -239,8 +239,8 @@ export const ArticleApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getArticle(limit?: number, tag?: string, options?: any): AxiosPromise<InlineResponse200> {
-            return ArticleApiFp(configuration).getArticle(limit, tag, options).then((request) => request(axios, basePath));
+        getArticles(limit?: number, tag?: string, options?: any): AxiosPromise<InlineResponse200> {
+            return ArticleApiFp(configuration).getArticles(limit, tag, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -261,8 +261,8 @@ export class ArticleApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ArticleApi
      */
-    public getArticle(limit?: number, tag?: string, options?: any) {
-        return ArticleApiFp(this.configuration).getArticle(limit, tag, options).then((request) => request(this.axios, this.basePath));
+    public getArticles(limit?: number, tag?: string, options?: any) {
+        return ArticleApiFp(this.configuration).getArticles(limit, tag, options).then((request) => request(this.axios, this.basePath));
     }
 
 }
