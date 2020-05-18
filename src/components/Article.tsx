@@ -26,7 +26,12 @@ const RightPane: NextComponentType<
         )}
       </div>
       <div>取得日: {article.crawledAt}</div>
-      <div>from {article.site.name}</div>
+      <div>
+        from{" "}
+        <a rel="noopener noreferrer" target="_blank" href={article.site.url}>
+          {article.site.name}
+        </a>
+      </div>
       <style jsx>
         {`
           .pane {
