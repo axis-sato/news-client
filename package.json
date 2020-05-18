@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx ./src",
     "formatt": "eslint --fix --ext .ts,.tsx,.js,.jsx ./src",
-    "api:gen": "openapi-generator generate -i ./api/news-api.v1.yaml -g typescript-axios -o ./src/data/api"
+    "api:gen": "openapi-generator generate -i ./api/open-api/news-api.v1.yaml -g typescript-axios -o ./src/data/api"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",

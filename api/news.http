@@ -1,9 +1,0 @@
-### Get Articles
-GET http://localhost:3001/api/v1/articles
-### Get Articles With Limit
-GET http://localhost:3001/api/v1/articles?limit=10
-### Get Articles With Limit and After
-GET http://localhost:3001/api/v1/articles?limit=10&after=5
-
-### Get Error
-GET http://localhost:3001/api/v1/error
