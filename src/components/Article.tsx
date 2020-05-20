@@ -1,5 +1,6 @@
 import { NextComponentType, NextPageContext } from "next";
 import { Article } from "~/data/api";
+import dayjs from "dayjs";
 
 const Thumbnail: NextComponentType<
   NextPageContext,
@@ -25,7 +26,7 @@ const RightPane: NextComponentType<
           (t, i, arr) => t.name + (arr.length - 1 === i ? "" : ", ")
         )}
       </div>
-      <div>取得日: {article.crawledAt}</div>
+      <div>取得日: {dayjs(article.crawledAt).format("YYYY/MM/DD")}</div>
       <div>
         from{" "}
         <a rel="noopener noreferrer" target="_blank" href={article.site.url}>
