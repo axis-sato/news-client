@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx ./src",
     "formatt": "eslint --fix --ext .ts,.tsx,.js,.jsx ./src",
-    "api:gen": "openapi-generator generate -i ./api/open-api/news-api.v1.yaml -g typescript-axios -o ./src/data/api"
+    "api:gen": "openapi-generator generate -i ./api/open-api/news-api.v1.yaml -g typescript-axios -o ./src/data/api",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,6 +21,7 @@
     "swr": "^0.2.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^9.4.1",
     "@openapitools/openapi-generator-cli": "^1.0.13-4.3.1",
     "@types/node": "^14.0.1",
     "@types/react": "^16.9.35",
