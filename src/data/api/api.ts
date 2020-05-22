@@ -169,10 +169,11 @@ export const ArticleApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Your GET endpoint
          * @param {number} [limit] 取得件数
          * @param {string} [tag] 取得対象のタグ名
+         * @param {number} [after] afterで指定したID以降の記事を取得する
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getArticles: async (limit?: number, tag?: string, options: any = {}): Promise<RequestArgs> => {
+        getArticles: async (limit?: number, tag?: string, after?: number, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/articles`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
             let baseOptions;
@@ -189,6 +190,10 @@ export const ArticleApiAxiosParamCreator = function (configuration?: Configurati
 
             if (tag !== undefined) {
                 localVarQueryParameter['tag'] = tag;
+            }
+
+            if (after !== undefined) {
+                localVarQueryParameter['after'] = after;
             }
 
 
@@ -218,11 +223,12 @@ export const ArticleApiFp = function(configuration?: Configuration) {
          * @summary Your GET endpoint
          * @param {number} [limit] 取得件数
          * @param {string} [tag] 取得対象のタグ名
+         * @param {number} [after] afterで指定したID以降の記事を取得する
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getArticles(limit?: number, tag?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
-            const localVarAxiosArgs = await ArticleApiAxiosParamCreator(configuration).getArticles(limit, tag, options);
+        async getArticles(limit?: number, tag?: string, after?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200>> {
+            const localVarAxiosArgs = await ArticleApiAxiosParamCreator(configuration).getArticles(limit, tag, after, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -242,11 +248,12 @@ export const ArticleApiFactory = function (configuration?: Configuration, basePa
          * @summary Your GET endpoint
          * @param {number} [limit] 取得件数
          * @param {string} [tag] 取得対象のタグ名
+         * @param {number} [after] afterで指定したID以降の記事を取得する
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getArticles(limit?: number, tag?: string, options?: any): AxiosPromise<InlineResponse200> {
-            return ArticleApiFp(configuration).getArticles(limit, tag, options).then((request) => request(axios, basePath));
+        getArticles(limit?: number, tag?: string, after?: number, options?: any): AxiosPromise<InlineResponse200> {
+            return ArticleApiFp(configuration).getArticles(limit, tag, after, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -263,12 +270,13 @@ export class ArticleApi extends BaseAPI {
      * @summary Your GET endpoint
      * @param {number} [limit] 取得件数
      * @param {string} [tag] 取得対象のタグ名
+     * @param {number} [after] afterで指定したID以降の記事を取得する
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ArticleApi
      */
-    public getArticles(limit?: number, tag?: string, options?: any) {
-        return ArticleApiFp(this.configuration).getArticles(limit, tag, options).then((request) => request(this.axios, this.basePath));
+    public getArticles(limit?: number, tag?: string, after?: number, options?: any) {
+        return ArticleApiFp(this.configuration).getArticles(limit, tag, after, options).then((request) => request(this.axios, this.basePath));
     }
 
 }
