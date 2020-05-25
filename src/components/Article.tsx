@@ -38,6 +38,7 @@ const RightPane: NextComponentType<
           .pane {
             display: flex;
             flex-direction: column;
+            margin-left: 10px;
           }
         `}
       </style>
@@ -59,6 +60,8 @@ const ArticleCard: NextComponentType<
           .article {
             display: flex;
             padding: 0px, 100px;
+            margin-top: 10px;
+            margin-bottom: 10px;
           }
         `}
       </style>

@@ -50,11 +50,19 @@ const Home: NextPage = () => {
   );
 
   return (
-    <div>
+    <div className="home">
       {pages}
       <button onClick={loadMore} disabled={isReachingEnd || isLoadingMore}>
         {isLoadingMore ? ". . ." : isReachingEnd ? "no more data" : "load more"}
       </button>
+      <style jsx>
+        {`
+          .home {
+            padding-left: 30px;
+            padding-right: 30px;
+          }
+        `}
+      </style>
     </div>
   );
 };
