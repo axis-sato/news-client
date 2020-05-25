@@ -3,6 +3,8 @@ import useSWR, { useSWRPages } from "swr";
 import { ArticleApi, Configuration, Article } from "~/data/api";
 import ArticleCard from "~/components/Article";
 
+const articlesLimt = 10;
+
 const fetchArticles = async (
   limit: number,
   after: number | null
@@ -33,7 +35,7 @@ const Home: NextPage = () => {
         key += `?after=${after}`;
       }
       const { data: articles } = withSWR(
-        useSWR(key, () => fetchArticles(3, after))
+        useSWR(key, () => fetchArticles(articlesLimt, after))
       );
       if (!articles) {
         return <p>loading...</p>;
